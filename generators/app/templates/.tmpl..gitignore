@@ -1,0 +1,12 @@
+*.iml
+*.ipr
+*.iws
+.idea/
+*.log
+*.log.zip
+*.log.*.gz
+target/
+.DS_Store
+package-lock.json
+node_modules/
+*.versionsBackup
