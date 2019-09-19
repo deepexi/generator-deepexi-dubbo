@@ -28,7 +28,7 @@ const args0 = {
     option: { desc: '注册中心', type: String, default: 'zookeeper' }
   },
   converter: {
-    prompting: { type: 'list', choices: ['mapstruct', 'none'], message: '请选择你使用的对象映射类型' },
+    prompting: { type: 'list', choices: ['mapstruct', 'spring-converter', 'none'], message: '请选择你使用的对象映射类型' },
     option: { desc: '对象映射', type: String, default: 'none' }
   },
   db: {

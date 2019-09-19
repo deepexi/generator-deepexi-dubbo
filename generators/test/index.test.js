@@ -14,7 +14,7 @@ describe('generate app', () => {
       .withPrompts({
         groupId: 'com.deepexi',
         artifactId: 'foo-service',
-        basePackage: 'com.deepexi.foo',
+        basePackage: 'com.deepexi.foo'
       });
   });
 
@@ -82,6 +82,7 @@ describe('generate app', () => {
         assert.file('foo-service-provider/src/main/java/com/deepexi/foo/extension/web/Payload.java')
         assert.file('foo-service-provider/src/main/java/com/deepexi/foo/mapper/.gitkeep')
         assert.file('foo-service-provider/src/main/java/com/deepexi/foo/remote/.gitkeep')
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/util/.gitkeep')
         assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/.gitkeep')
       })
     })
@@ -186,37 +187,67 @@ describe('optional dependencies', () => {
   });
 
   describe('converter', () => {
-    before(() => {
-      return helpers
-        .run(path.join(__dirname, '../app'))
-        .withPrompts({
-          groupId: 'com.deepexi',
-          artifactId: 'foo-service',
-          basePackage: 'com.deepexi.foo',
-          converter: 'mapstruct',
-          demo: true
-        });
-    });
+    describe('mapstruct', () => {
+      before(() => {
+        return helpers
+          .run(path.join(__dirname, '../app'))
+          .withPrompts({
+            groupId: 'com.deepexi',
+            artifactId: 'foo-service',
+            basePackage: 'com.deepexi.foo',
+            converter: 'mapstruct',
+            demo: true
+          });
+      });
 
-    it('should exists files', () => {
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoConverter.java')
-    });
+      it('should exists files', () => {
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoConverter.java')
+      });
 
-    it('should have dependency', () => {
-      assert.fileContent([
-        ['foo-service-provider/pom.xml', /<groupId>org\.mapstruct<\/groupId>/],
-        ['foo-service-provider/pom.xml', /<artifactId>mapstruct-jdk8<\/artifactId>/],
-        ['foo-service-provider/pom.xml', /<version>1\.2\.0\.Final<\/version>/],
-        ['foo-service-provider/pom.xml', /<groupId>org\.mapstruct<\/groupId>/],
-        ['foo-service-provider/pom.xml', /<artifactId>mapstruct-processor<\/artifactId>/],
-        ['foo-service-provider/pom.xml', /<version>1\.2\.0\.Final<\/version>/]
-      ])
-    });
+      it('should have dependency', () => {
+        assert.fileContent([
+          ['foo-service-provider/pom.xml', /<groupId>org\.mapstruct<\/groupId>/],
+          ['foo-service-provider/pom.xml', /<artifactId>mapstruct-jdk8<\/artifactId>/],
+          ['foo-service-provider/pom.xml', /<version>1\.2\.0\.Final<\/version>/],
+          ['foo-service-provider/pom.xml', /<groupId>org\.mapstruct<\/groupId>/],
+          ['foo-service-provider/pom.xml', /<artifactId>mapstruct-processor<\/artifactId>/],
+          ['foo-service-provider/pom.xml', /<version>1\.2\.0\.Final<\/version>/]
+        ])
+      });
 
-    it('should exist contents', () => {
-      assert.fileContent([
-        ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', /convert\.dto2vo\(service\.get/]
-      ])
+      it('should exist contents', () => {
+        assert.fileContent([
+          ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', /convert\.dto2vo\(service\.get/]
+        ])
+      });
+    });
+    describe('spring-converter', () => {
+      before(() => {
+        return helpers
+          .run(path.join(__dirname, '../app'))
+          .withPrompts({
+            groupId: 'com.deepexi',
+            artifactId: 'foo-service',
+            basePackage: 'com.deepexi.foo',
+            converter: 'spring-converter',
+            demo: true
+          });
+      });
+
+      it('should exists files', () => {
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/web/ConverterConfigurer.java')
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java')
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java')
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoDTO2OtherVOConverter.java')
+        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/util/ConverterUtils.java')
+      });
+
+      it('should exist contents', () => {
+        assert.fileContent([
+          ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', /return convert\(service\.get\(\),OtherVO\.class\);/],
+          ['foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', /public class ApplicationConfiguration implements InitializingBean {/]
+        ])
+      });
     });
   });
 
