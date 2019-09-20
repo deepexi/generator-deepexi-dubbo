@@ -1,89 +1,118 @@
 'use strict'
 /* eslint-disable no-undef */
+/* eslint-disable no-useless-escape */
 
+const _ = require('lodash');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
 
+const getExecutor = (answers) => {
+  return helpers
+    .run(path.join(__dirname, '../app'))
+    .withPrompts({
+      groupId: 'com.deepexi',
+      artifactId: 'foo-service',
+      basePackage: 'com.deepexi.foo',
+      ...answers
+    });
+};
+
+const assertFileContent = (file, regex) => {
+  const arr = [];
+  if (_.isArray(regex)) {
+    regex.forEach(v => {
+      arr.push([file, v]);
+    });
+  }
+  assert.fileContent(arr);
+};
+
+const assertFiles = (files) => {
+  files.forEach(file => assert.file(file));
+};
+
 describe('generate app', () => {
   before(() => {
-    return helpers
-      .run(path.join(__dirname, '../app'))
-      .withPrompts({
-        groupId: 'com.deepexi',
-        artifactId: 'foo-service',
-        basePackage: 'com.deepexi.foo'
-      });
+    return getExecutor();
   });
 
   describe('should exists files', () => {
     it('base', () => {
-      assert.file('.gitignore')
-      assert.file('Dockerfile')
-      assert.file('build.sh')
-      assert.file('commitlint.config.js')
-      assert.file('common.sh')
-      assert.file('entrypoint.sh')
-      assert.file('filebeat.yml')
-      assert.file('package.json')
-      assert.file('pom.xml')
-      assert.file('README.md')
-      assert.file('run.sh')
-      assert.file('scaffold.md')
-      assert.file('start-code.sh')
-      assert.file('start-fb.sh')
+      assertFiles([
+        '.gitignore',
+        'Dockerfile',
+        'build.sh',
+        'commitlint.config.js',
+        'common.sh',
+        'entrypoint.sh',
+        'filebeat.yml',
+        'package.json',
+        'pom.xml',
+        'README.md',
+        'run.sh',
+        'scaffold.md',
+        'start-code.sh',
+        'start-fb.sh'
+      ]);
     })
 
     describe('foo-service-api', () => {
       it('base', () => {
-        assert.file('foo-service-api/pom.xml')
+        assertFiles(['foo-service-api/pom.xml']);
       })
       it('java', () => {
-        assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/.gitkeep')
-        assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/.gitkeep')
-        assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/vo/.gitkeep')
+        assertFiles([
+          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/.gitkeep',
+          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/.gitkeep',
+          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/vo/.gitkeep'
+        ]);
       })
     })
 
     describe('foo-service-provider', () => {
       it('base', () => {
-        assert.file('foo-service-provider/pom.xml')
+        assertFiles(['foo-service-provider/pom.xml']);
       })
       it('resources', () => {
-        assert.file('foo-service-provider/src/main/resources/application.yml')
-        assert.file('foo-service-provider/src/main/resources/application-local.yml')
-        assert.file('foo-service-provider/src/main/resources/application-dev.yml')
-        assert.file('foo-service-provider/src/main/resources/application-qa.yml')
-        assert.file('foo-service-provider/src/main/resources/application-prod.yml')
+        assertFiles([
+          'foo-service-provider/src/main/resources/application.yml',
+          'foo-service-provider/src/main/resources/application-local.yml',
+          'foo-service-provider/src/main/resources/application-dev.yml',
+          'foo-service-provider/src/main/resources/application-qa.yml',
+          'foo-service-provider/src/main/resources/application-prod.yml'
+        ]);
       })
       it('java', () => {
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/StartupApplication.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/api/impl/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/web/ApplicationErrorAttributes.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/web/ReturnValueConfigurer.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/constant/BizCode.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/query/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/enums/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/BizErrorResponseStatus.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataExistException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataNotExistException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataNotFoundException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataPermissionException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataRepetitionException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/exception/common/UnableOperateException.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/extension/web/Payload.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/mapper/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/remote/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/util/.gitkeep')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/.gitkeep')
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/StartupApplication.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/api/impl/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/web/ApplicationErrorAttributes.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/web/ReturnValueConfigurer.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/constant/BizCode.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/controller/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/converter/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/query/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/enums/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/BizErrorResponseStatus.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataExistException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataNotExistException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataNotFoundException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataPermissionException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataRepetitionException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/UnableOperateException.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/extension/web/Payload.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/mapper/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/remote/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/util/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/.gitkeep'
+        ]);
       })
     })
   });
@@ -91,40 +120,37 @@ describe('generate app', () => {
 
 describe('generate demo', () => {
   before(() => {
-    return helpers
-      .run(path.join(__dirname, '../app'))
-      .withPrompts({
-        groupId: 'com.deepexi',
-        artifactId: 'foo-service',
-        basePackage: 'com.deepexi.foo',
-        demo: true
-      });
+    return getExecutor({ demo: true });
   });
 
   describe('foo-service-api', () => {
     it('base', () => {
-      assert.file('foo-service-api/pom.xml')
+      assertFiles(['foo-service-api/pom.xml']);
     })
     it('java', () => {
-      assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/DubboDemoDTO.java')
-      assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/DubboDemoQuery.java')
-      assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageDemo.java')
-      assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageRequestDemo.java')
-      assert.file('foo-service-api/src/main/java/com/deepexi/foo/api/DubboDemoRemoteServiceApi.java')
+      assertFiles([
+        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/DubboDemoDTO.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/DubboDemoQuery.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageDemo.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageRequestDemo.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/DubboDemoRemoteServiceApi.java'
+      ]);
     })
   })
 
   describe('foo-service-provider', () => {
     it('java', () => {
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/api/impl/DubboDemoRemoteServiceApiImpl.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/DubboDemoController.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/DemoDTO.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/DemoVO.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/DemoService.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/DubboDemoService.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DemoServiceImpl.java')
-      assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DubboDemoServiceImpl.java')
+      assertFiles([
+        'foo-service-provider/src/main/java/com/deepexi/foo/api/impl/DubboDemoRemoteServiceApiImpl.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/controller/DubboDemoController.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/DemoDTO.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/DemoVO.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/service/DemoService.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/service/DubboDemoService.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DemoServiceImpl.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DubboDemoServiceImpl.java'
+      ]);
     })
   })
 });
@@ -133,16 +159,9 @@ describe('optional dependencies', () => {
   describe('discovery', () => {
     describe('zookeeper', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            discovery: 'zookeeper',
-            demo: true
-          });
+        return getExecutor({ discovery: 'zookeeper', demo: true });
       });
+
       it('should have dependency', () => {
         assert.fileContent([
           ['foo-service-provider/pom.xml', /<groupId>com\.101tec<\/groupId>/],
@@ -158,15 +177,7 @@ describe('optional dependencies', () => {
     });
     describe('nacos', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            discovery: 'nacos',
-            demo: true
-          });
+        return getExecutor({ discovery: 'nacos', demo: true });
       });
       it('should have dependency', () => {
         assert.fileContent([
@@ -189,19 +200,13 @@ describe('optional dependencies', () => {
   describe('converter', () => {
     describe('mapstruct', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            converter: 'mapstruct',
-            demo: true
-          });
+        return getExecutor({ converter: 'mapstruct', demo: true });
       });
 
       it('should exists files', () => {
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoConverter.java')
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoConverter.java'
+        ]);
       });
 
       it('should have dependency', () => {
@@ -216,37 +221,34 @@ describe('optional dependencies', () => {
       });
 
       it('should exist contents', () => {
-        assert.fileContent([
-          ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', /convert\.dto2vo\(service\.get/]
-        ])
+        assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', [
+          'convert.dto2vo(service.get'
+        ]);
       });
     });
+
     describe('spring-converter', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            converter: 'spring-converter',
-            demo: true
-          });
+        return getExecutor({ converter: 'spring-converter', demo: true });
       });
 
       it('should exists files', () => {
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/web/ConverterConfigurer.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoDTO2OtherVOConverter.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/util/ConverterUtils.java')
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/web/ConverterConfigurer.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/converter/DemoDTO2OtherVOConverter.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/util/ConverterUtils.java'
+        ]);
       });
 
       it('should exist contents', () => {
-        assert.fileContent([
-          ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', /return convert\(service\.get\(\),OtherVO\.class\);/],
-          ['foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', /public class ApplicationConfiguration implements InitializingBean {/]
-        ])
+        assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java', [
+          'return convert(service.get(),OtherVO.class);'
+        ]);
+        assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', [
+          'public class ApplicationConfiguration implements InitializingBean {'
+        ]);
       });
     });
   });
@@ -255,24 +257,13 @@ describe('optional dependencies', () => {
     describe('orm', () => {
       describe('mybatis-plus', () => {
         before(() => {
-          return helpers
-            .run(path.join(__dirname, '../app'))
-            .withPrompts({
-              groupId: 'com.deepexi',
-              artifactId: 'foo-service',
-              basePackage: 'com.deepexi.foo',
-              db: 'mysql',
-              orm: 'mybatis-plus',
-              demo: true
-            });
+          return getExecutor({ db: 'mysql', orm: 'mybatis-plus', demo: true });
         });
 
         it('should have dependency', () => {
-          assert.fileContent([
-            ['foo-service-provider/pom.xml', /<groupId>com.baomidou<\/groupId>/],
-            ['foo-service-provider/pom.xml', /<artifactId>mybatis-plus-boot-starter<\/artifactId>/],
-            ['foo-service-provider/pom.xml', /<version>3\.1\.2<\/version>/]
-          ])
+          assertFileContent('foo-service-provider/pom.xml', [
+            'mybatis-plus-boot-starter'
+          ]);
         });
 
         it('should have properties', () => {
@@ -280,21 +271,23 @@ describe('optional dependencies', () => {
         });
 
         it('should exist files', () => {
-          assert.file('foo-service-provider/src/main/resources/mapper/.gitkeep')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationMetaObjectHandler.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/CrudDemoController.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/CrudDemoService.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/CrudDemoServiceImpl.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/CrudDemoService.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/mapper/CrudDemoMapper.java')
-          assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/CrudDemoDO.java')
+          assertFiles([
+            'foo-service-provider/src/main/resources/mapper/.gitkeep',
+            'foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationMetaObjectHandler.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/controller/CrudDemoController.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/service/CrudDemoService.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/CrudDemoServiceImpl.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/service/CrudDemoService.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/mapper/CrudDemoMapper.java',
+            'foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/CrudDemoDO.java'
+          ]);
         });
 
         it('should exist contents', () => {
-          assert.fileContent([
-            ['foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', /ApplicationMetaObjectHandler.RuntimeData/],
-            ['foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', /PaginationInterceptor/]
-          ])
+          assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/config/ApplicationConfiguration.java', [
+            'ApplicationMetaObjectHandler.RuntimeData',
+            'PaginationInterceptor'
+          ]);
         });
       });
     });
@@ -302,24 +295,13 @@ describe('optional dependencies', () => {
     describe('pool', () => {
       describe('druid', () => {
         before(() => {
-          return helpers
-            .run(path.join(__dirname, '../app'))
-            .withPrompts({
-              groupId: 'com.deepexi',
-              artifactId: 'foo-service',
-              basePackage: 'com.deepexi.foo',
-              db: 'mysql',
-              dbPool: 'druid',
-              demo: true
-            });
+          return getExecutor({ db: 'mysql', dbPool: 'druid', demo: true });
         });
 
         it('should have dependency', () => {
-          assert.fileContent([
-            ['foo-service-provider/pom.xml', /<groupId>com.alibaba<\/groupId>/],
-            ['foo-service-provider/pom.xml', /<artifactId>druid-spring-boot-starter<\/artifactId>/],
-            ['foo-service-provider/pom.xml', /<version>1\.1\.17<\/version>/]
-          ])
+          assertFileContent('foo-service-provider/pom.xml', [
+            '<artifactId>druid-spring-boot-starter</artifactId>'
+          ]);
         });
 
         it('should have properties', () => {
@@ -333,29 +315,22 @@ describe('optional dependencies', () => {
   describe('circuit', () => {
     describe('hystrix', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            circuit: 'hystrix',
-            demo: true
-          });
+        return getExecutor({ circuit: 'hystrix', demo: true });
       });
 
       it('should have dependency', () => {
-        assert.fileContent([
-          ['foo-service-provider/pom.xml', /<groupId>org\.springframework\.cloud<\/groupId>/],
-          ['foo-service-provider/pom.xml', /<artifactId>spring-cloud-starter-netflix-hystrix<\/artifactId>/]
-        ])
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>'
+        ]);
       });
 
       it('should exist contents', () => {
-        assert.fileContent([
-          ['foo-service-provider/src/main/java/com/deepexi/foo/StartupApplication.java', /@EnableHystrix/],
-          ['foo-service-provider/src/main/java/com/deepexi/foo/controller/DubboDemoController.java', /@HystrixCommand\(fallbackMethod/]
-        ])
+        assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/StartupApplication.java', [
+          '@EnableHystrix'
+        ]);
+        assertFileContent('foo-service-provider/src/main/java/com/deepexi/foo/controller/DubboDemoController.java', [
+          '@HystrixCommand(fallbackMethod'
+        ]);
       });
     });
   });
@@ -363,35 +338,43 @@ describe('optional dependencies', () => {
   describe('mq', () => {
     describe('rabbitmq', () => {
       before(() => {
-        return helpers
-          .run(path.join(__dirname, '../app'))
-          .withPrompts({
-            groupId: 'com.deepexi',
-            artifactId: 'foo-service',
-            basePackage: 'com.deepexi.foo',
-            mq: 'rabbitmq',
-            demo: true
-          });
+        return getExecutor({ mq: 'rabbitmq', demo: true });
       });
 
       it('should exists files', () => {
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/controller/MQDemoController.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQConfiguration.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQDemoConfiguration.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/MQDemoDTO.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/MQDemoService.java')
-        assert.file('foo-service-provider/src/main/java/com/deepexi/foo/service/impl/RabbitMQDemoServiceImpl.java')
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/controller/MQDemoController.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQConfiguration.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQDemoConfiguration.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/MQDemoDTO.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/MQDemoService.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/RabbitMQDemoServiceImpl.java'
+        ]);
       });
 
       it('should have dependency', () => {
-        assert.fileContent([
-          ['foo-service-provider/pom.xml', /<groupId>org\.springframework\.boot<\/groupId>/],
-          ['foo-service-provider/pom.xml', /<artifactId>spring-boot-starter-amqp<\/artifactId>/]
-        ])
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-boot-starter-amqp</artifactId>'
+        ]);
       });
 
       it('should have properties', () => {
         assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application-local.yml')).spring.rabbitmq);
+      });
+    });
+  });
+
+  describe('webServer', () => {
+    describe('undertow', () => {
+      before(() => {
+        return getExecutor({ webServer: 'undertow' });
+      });
+
+      it('should have dependency', () => {
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-boot-starter-undertow</artifactId>',
+          'spring-boot-starter-tomcat'
+        ]);
       });
     });
   });
