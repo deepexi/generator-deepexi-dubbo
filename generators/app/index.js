@@ -71,6 +71,10 @@ const args0 = {
     },
     option: { desc: '消息中间件', type: String, default: 'none' }
   },
+  webServer: {
+    prompting: { type: 'list', choices: ['tomcat', 'undertow'], message: '请选择你使用的Web服务器（默认Tomcat）' },
+    option: { desc: 'Web服务器', type: String, default: 'tomcat' }
+  },
   demo: {
     prompting: {
       type: 'confirm',
@@ -117,5 +121,6 @@ module.exports = require('yo-power-generator').getGenerator(args0, {
     }
 
     props.basePath = props.basePackage.replace(/\./g, '/');
+    props.basic = true;
   }
 });
