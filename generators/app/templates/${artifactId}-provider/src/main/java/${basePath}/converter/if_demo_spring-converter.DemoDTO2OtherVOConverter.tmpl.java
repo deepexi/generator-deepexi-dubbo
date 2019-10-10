@@ -1,7 +1,7 @@
 package ${basePackage}.converter;
 
-import ${basePackage}.domain.dto.DemoDTO;
-import ${basePackage}.domain.vo.OtherVO;
+import ${basePackage}.model.dto.DemoDTO;
+import ${basePackage}.model.vo.OtherVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

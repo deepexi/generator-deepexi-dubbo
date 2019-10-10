@@ -1,4 +1,4 @@
-package ${basePackage}.api.domain.dto;
+package ${basePackage}.api.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

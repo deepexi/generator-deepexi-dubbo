@@ -1,6 +1,6 @@
 package ${basePackage}.config;
 
-import ${basePackage}.domain.dto.MQDemoDTO;
+import ${basePackage}.model.dto.MQDemoDTO;
 import ${basePackage}.service.MQDemoService;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

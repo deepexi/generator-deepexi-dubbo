@@ -1,4 +1,4 @@
-package ${basePackage}.api.domain;
+package ${basePackage}.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

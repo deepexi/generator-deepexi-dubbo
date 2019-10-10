@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 
-import ${basePackage}.domain.dto.DemoDTO;
+import ${basePackage}.model.dto.DemoDTO;
 
 public interface DemoService {
 

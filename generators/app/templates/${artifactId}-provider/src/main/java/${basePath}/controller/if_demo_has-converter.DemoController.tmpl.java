@@ -1,7 +1,8 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.domain.vo.DemoVO;
-import ${basePackage}.domain.query.ValidDemoQuery;
+import ${basePackage}.model.vo.DemoVO;
+import ${basePackage}.model.query.ValidDemoQuery;
+import ${basePackage}.util.ValidationUtils;
 import ${basePackage}.exception.common.DataExistException;
 import ${basePackage}.extension.web.Payload;
 import ${basePackage}.service.DemoService;
@@ -20,7 +21,7 @@ import javax.validation.Valid;
 <%
     if(conditions['spring-converter']){
         print(`import static ${basePackage}.util.ConverterUtils.convert;\n`)
-        print(`import ${basePackage}.domain.vo.OtherVO;`)
+        print(`import ${basePackage}.model.vo.OtherVO;`)
     }
 %>
 
@@ -69,12 +70,10 @@ public class DemoController {
         throw new DataExistException("Demo数据已存在");
     }
 
-   @GetMapping("valid")
+    @GetMapping("valid")
     public String valid(@Valid ValidDemoQuery query, BindingResult result) {
-        if (result.hasErrors()) {
-            for (FieldError fieldError : result.getFieldErrors()) {
-                System.out.println(fieldError.getDefaultMessage());
-            }
+        BindingResult errors = ValidationUtils.validate(query, ValidDemoQuery.Role.class);
+        if (result.hasErrors() || errors.hasErrors()) {
             return "fail";
         }
         return "success";

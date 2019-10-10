@@ -1,6 +1,6 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.domain.entity.CrudDemoDO;
+import ${basePackage}.model.entity.CrudDemoDO;
 import ${basePackage}.extension.web.Payload;
 import ${basePackage}.service.CrudDemoService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package ${basePackage}.domain.vo;
+package ${basePackage}.model.vo;
 
 import lombok.Data;
 

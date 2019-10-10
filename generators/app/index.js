@@ -90,7 +90,7 @@ module.exports = require('yo-power-generator').getGenerator(args0, {
   handlerDir: path.join(__dirname, 'handler'),
   templateDir: path.join(__dirname, 'templates'),
   afterPropsSet (props) {
-    props.version = require('../../package.json').versions
+    props.version = require('../../package.json').version
     props.cli = `yo generator-deepexi-dubbo -c ${props.cli}`;
 
     props.conditions = {};

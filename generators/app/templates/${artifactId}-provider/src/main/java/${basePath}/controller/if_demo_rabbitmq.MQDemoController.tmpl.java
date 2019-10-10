@@ -1,6 +1,6 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.domain.dto.MQDemoDTO;
+import ${basePackage}.model.dto.MQDemoDTO;
 import ${basePackage}.extension.web.Payload;
 import ${basePackage}.service.MQDemoService;
 import io.swagger.annotations.ApiOperation;
