@@ -90,8 +90,8 @@ $ yo deepexi-dubbo --help
 | 开发框架  | ✅springfox(swagger) | ✅lombok     | ☑️guava    | ✅common-lang3 |      |
 | 测试框架  | ☑️jacoco             | ☑️mockserver | ☑️mockneat |               |      |
 | 部署相关  | ✅docker             | ✅filebeat   |           |               |      |
-| ✅devtools |                     |             |           |               |      |
-|   其它    | ☑️actuator           |             |           |               |      |
+| 开发相关 |  ✅devtools           |             |           |               |      |
+|   其它    | ☑️actuator          |             |           |               |      |
 
 
 ## Development Reference
