@@ -1,8 +1,8 @@
 package ${basePackage}.api;
 
-import ${basePackage}.api.domain.PageDemo;
-import ${basePackage}.api.domain.dto.DubboDemoDTO;
-import ${basePackage}.api.domain.query.DubboDemoQuery;
+import ${basePackage}.api.model.PageDemo;
+import ${basePackage}.api.model.dto.DubboDemoDTO;
+import ${basePackage}.api.model.query.DubboDemoQuery;
 
 public interface DubboDemoRemoteServiceApi {
 

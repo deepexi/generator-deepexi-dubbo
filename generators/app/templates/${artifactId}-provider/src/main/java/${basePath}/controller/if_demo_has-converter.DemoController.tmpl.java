@@ -1,7 +1,7 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.domain.vo.DemoVO;
-import ${basePackage}.domain.query.ValidDemoQuery;
+import ${basePackage}.model.vo.DemoVO;
+import ${basePackage}.model.query.ValidDemoQuery;
 import ${basePackage}.util.ValidationUtils;
 import ${basePackage}.exception.common.DataExistException;
 import ${basePackage}.extension.web.Payload;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 <%
     if(conditions['spring-converter']){
         print(`import static ${basePackage}.util.ConverterUtils.convert;\n`)
-        print(`import ${basePackage}.domain.vo.OtherVO;`)
+        print(`import ${basePackage}.model.vo.OtherVO;`)
     }
 %>
 

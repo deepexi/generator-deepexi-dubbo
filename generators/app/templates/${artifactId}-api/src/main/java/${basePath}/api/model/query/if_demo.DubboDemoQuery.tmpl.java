@@ -1,6 +1,6 @@
-package ${basePackage}.api.domain.query;
+package ${basePackage}.api.model.query;
 
-import ${basePackage}.api.domain.PageRequestDemo;
+import ${basePackage}.api.model.PageRequestDemo;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
 

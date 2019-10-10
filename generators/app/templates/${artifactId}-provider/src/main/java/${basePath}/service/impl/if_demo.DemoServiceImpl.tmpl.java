@@ -1,6 +1,6 @@
 package ${basePackage}.service.impl;
 
-import ${basePackage}.domain.dto.DemoDTO;
+import ${basePackage}.model.dto.DemoDTO;
 import ${basePackage}.service.DemoService;
 import org.springframework.stereotype.Service;
 

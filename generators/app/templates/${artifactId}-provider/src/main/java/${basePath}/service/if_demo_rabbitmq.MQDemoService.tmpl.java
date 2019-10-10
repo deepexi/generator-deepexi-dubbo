@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 
-import ${basePackage}.domain.dto.MQDemoDTO;
+import ${basePackage}.model.dto.MQDemoDTO;
 
 public interface MQDemoService {
 

@@ -1,6 +1,6 @@
 package ${basePackage}.service.impl;
 
-import ${basePackage}.domain.dto.MQDemoDTO;
+import ${basePackage}.model.dto.MQDemoDTO;
 import ${basePackage}.service.MQDemoService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

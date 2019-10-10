@@ -2,9 +2,9 @@ package ${basePackage}.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import ${basePackage}.api.DubboDemoRemoteServiceApi;
-import ${basePackage}.api.domain.PageDemo;
-import ${basePackage}.api.domain.dto.DubboDemoDTO;
-import ${basePackage}.api.domain.query.DubboDemoQuery;
+import ${basePackage}.api.model.PageDemo;
+import ${basePackage}.api.model.dto.DubboDemoDTO;
+import ${basePackage}.api.model.query.DubboDemoQuery;
 import ${basePackage}.extension.web.Payload;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -65,9 +65,9 @@ describe('generate app', () => {
       })
       it('java', () => {
         assertFiles([
-          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/.gitkeep',
-          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/.gitkeep',
-          'foo-service-api/src/main/java/com/deepexi/foo/api/domain/vo/.gitkeep'
+          'foo-service-api/src/main/java/com/deepexi/foo/api/model/dto/.gitkeep',
+          'foo-service-api/src/main/java/com/deepexi/foo/api/model/query/.gitkeep',
+          'foo-service-api/src/main/java/com/deepexi/foo/api/model/vo/.gitkeep'
         ]);
       })
     })
@@ -95,10 +95,14 @@ describe('generate app', () => {
           'foo-service-provider/src/main/java/com/deepexi/foo/constant/BizCode.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/controller/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/converter/.gitkeep',
-          'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/.gitkeep',
-          'foo-service-provider/src/main/java/com/deepexi/foo/domain/query/.gitkeep',
-          'foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/domain/manager/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/dto/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/entity/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/manager/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/repo/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/query/.gitkeep',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/vo/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/enums/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/exception/BizErrorResponseStatus.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/exception/common/DataExistException.java',
@@ -129,10 +133,10 @@ describe('generate demo', () => {
     })
     it('java', () => {
       assertFiles([
-        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/dto/DubboDemoDTO.java',
-        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/query/DubboDemoQuery.java',
-        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageDemo.java',
-        'foo-service-api/src/main/java/com/deepexi/foo/api/domain/PageRequestDemo.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/model/dto/DubboDemoDTO.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/model/query/DubboDemoQuery.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/model/PageDemo.java',
+        'foo-service-api/src/main/java/com/deepexi/foo/api/model/PageRequestDemo.java',
         'foo-service-api/src/main/java/com/deepexi/foo/api/DubboDemoRemoteServiceApi.java'
       ]);
     })
@@ -144,8 +148,8 @@ describe('generate demo', () => {
         'foo-service-provider/src/main/java/com/deepexi/foo/api/impl/DubboDemoRemoteServiceApiImpl.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/controller/DemoController.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/controller/DubboDemoController.java',
-        'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/DemoDTO.java',
-        'foo-service-provider/src/main/java/com/deepexi/foo/domain/vo/DemoVO.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/model/dto/DemoDTO.java',
+        'foo-service-provider/src/main/java/com/deepexi/foo/model/vo/DemoVO.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/service/DemoService.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/service/DubboDemoService.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DemoServiceImpl.java',
@@ -279,7 +283,7 @@ describe('optional dependencies', () => {
             'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/CrudDemoServiceImpl.java',
             'foo-service-provider/src/main/java/com/deepexi/foo/service/CrudDemoService.java',
             'foo-service-provider/src/main/java/com/deepexi/foo/mapper/CrudDemoMapper.java',
-            'foo-service-provider/src/main/java/com/deepexi/foo/domain/entity/CrudDemoDO.java'
+            'foo-service-provider/src/main/java/com/deepexi/foo/model/entity/CrudDemoDO.java'
           ]);
         });
 
@@ -346,7 +350,7 @@ describe('optional dependencies', () => {
           'foo-service-provider/src/main/java/com/deepexi/foo/controller/MQDemoController.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQConfiguration.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/config/RabbitMQDemoConfiguration.java',
-          'foo-service-provider/src/main/java/com/deepexi/foo/domain/dto/MQDemoDTO.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/model/dto/MQDemoDTO.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/service/MQDemoService.java',
           'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/RabbitMQDemoServiceImpl.java'
         ]);

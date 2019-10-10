@@ -1,7 +1,7 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.domain.vo.DemoVO;
-import ${basePackage}.domain.query.ValidDemoQuery;
+import ${basePackage}.model.vo.DemoVO;
+import ${basePackage}.model.query.ValidDemoQuery;
 import ${basePackage}.util.ValidationUtils;
 import ${basePackage}.exception.common.DataExistException;
 import ${basePackage}.extension.web.Payload;

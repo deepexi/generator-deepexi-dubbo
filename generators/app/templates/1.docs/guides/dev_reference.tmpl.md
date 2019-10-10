@@ -1,108 +1,6 @@
-# DeepEXI Dubbo Scaffold Generator
+# 开发参考
 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![Build Status](https://travis-ci.org/deepexi/generator-deepexi-dubbo.svg?branch=master)](https://travis-ci.org/deepexi/generator-deepexi-dubbo)
-[![codecov](https://codecov.io/gh/deepexi/generator-deepexi-dubbo/branch/master/graph/badge.svg)](https://codecov.io/gh/deepexi/generator-deepexi-dubbo)
-
-[npm-image]: https://img.shields.io/npm/v/generator-deepexi-dubbo.svg
-[npm-url]: https://www.npmjs.com/package/generator-deepexi-dubbo
-[download-image]: https://img.shields.io/npm/dm/generator-deepexi-dubbo.svg
-[download-url]: https://www.npmjs.com/package/generator-deepexi-dubbo
-
-此脚手架生成器基于[Yeoman](https://yeoman.io/)构建。
-
-[CHANGELOG](./CHANGELOG.md)
-
-## How To
-
-### Getting Started
-
-#### 1. 安装yeoman
-
-```bash
-$ npm install -g yo
-```
-
-#### 2. 安装generator-deepexi-dubbo
-
-```bash
-$ npm install -g generator-deepexi-dubbo
-```
-
-#### 3. 创建你的应用
-
-通过交互模式创建
-
-```bash
-$ mdir {your_project_name}
-$ cd {your_project_name}
-$ yo deepexi-dubbo
-```
-
-或者使用命令行模式创建
-
-```bash
-$ mdir {your_project_name}
-$ cd {your_project_name}
-$ yo deepexi-dubbo -c
-```
-
-更多帮助信息可以通过以下命令查看
-
-```bash
-$ yo deepexi-dubbo --help
-```
-
-## 功能一览
-
-### 可选项
-
-|  **类型**   |                        |                  |             |           |      |
-| :---------: | ---------------------- | ---------------- | ----------- | --------- | ---- |
-|  配置中心   | ☑️Apollo                | ☑️Disconfig       | ☑️Config     |           |      |
-|  消息队列   | ✅RabbitMQ              | ☑️RocketMQ        | Kafka       |           |      |
-|  注册中心   | ✅eureka                | ✅nacos           |             |           |      |
-|  任务调度   | ☑️ES Job                | ☑️XXL-Job         | ☑️SiaTask    | ☑️Quartz   |      |
-|    RDBMS    | ✅MySQL                 | ☑️PG SQL          | ☑️SQL Server |           |      |
-|    NoSQL    | ☑️Redis                 | ☑️MongoDB         |             |           |      |
-|   连接池    | ✅Druid                 |                  |             |           |      |
-|  权限控制   | ☑️Shiro                 | ☑️Spring Security |             |           |      |
-| 分布式事务  | ☑️Seata                 |                  |             |           |      |
-|     APM     | ☑️SkyWalking            | ☑️Zipkin          | ☑️PinPoint   |           |      |
-|  分库分表   | ☑️Sharding-JDBC         | ☑️MyCAT           |             |           |      |
-|   服务器    | ✅Tomcat                | ☑️Jetty           | ✅Undertow   |           |      |
-|  JSON解析   | ✅Jackson               | ☑️FastJson        | ☑️Gson       |           |      |
-|  模板引擎   | ☑️Thymeleaf             | ☑️Freemarker      |             |           |      |
-|  对象存储   | ☑️AliOSS                | ☑️FastDFS         | ☑️TencentOSS | ☑️QiNiuOSS |      |
-|     ORM     | ✅MybatisPlus           | ☑️JPA             |             |           |      |
-|  日志系统   | ✅Logback               | ☑️Log4j2          |             |           |      |
-|  WebSocket  | ☑️Spring Boot Websocket |                  |             |           |      |
-| Bean转换器  | ✅SpringMVC Converter   | ✅MapStruct       |             |           |      |
-| DeepEXI产品 | ☑️sPaaS                 |                  |             |           |      |
-| ✅SpringMVC  |                        |                  |             |           |      |
-
-### 固有项
-
-| **类型**  |                     |             |           |               |      |
-| :-------: | ------------------- | ----------- | --------- | ------------- | ---- |
-| Java版本  | ✅JDK1.8             |             |           |               |      |
-| 开发框架  | ✅springfox(swagger) | ✅lombok     | ☑️guava    | ✅common-lang3 |      |
-| 测试框架  | ☑️jacoco             | ☑️mockserver | ☑️mockneat |               |      |
-| 部署相关  | ✅docker             | ✅filebeat   |           |               |      |
-| ✅devtools |                     |             |           |               |      |
-|   其它    | ☑️actuator           |             |           |               |      |
-
-
-## Development Reference
-
-### 设计参考
-
-**[《阿里巴巴Java开发手册》](https://yq.aliyun.com/download/2719)**
-
-**[《DDD领域驱动设计》]()**
-
-### 工程结构
+## 工程结构
 
 ![各层间领域对象传输规范](https://user-gold-cdn.xitu.io/2019/9/30/16d7fff2a09e70b2?w=620&h=643&f=png&s=53825)
 
@@ -188,8 +86,15 @@ $ yo deepexi-dubbo --help
 ├── start-fb.sh     // filebeat启动脚本
 ├── LICENSE         // 协议信息
 ```
-  
-### 学习文档
+## Node.JS相关
+
+以下功能均基于Node.JS，使用前请先确保安装了[Node.JS](https://nodejs.org/zh-cn/download/)并在项目根目录下执行`npm install`。
+
+- 通过 `commitlint` + `husky` 自动控制commit规范（安装husky会修改githook，因此需要确保已经执行`git init`）
+- 使用 `npm run commit` 通过交互模式提交代码
+- 使用 `npm run release` 根据提交记录自动调整版本并生成相应的CHANGELOG
+
+## 学习文档
 
 - **Dubbo**：Dubbo 是一款高性能、轻量级的开源 Java RPC 框架，你可以点击 → [Dubbo 官方文档](http://dubbo.apache.org/zh-cn/docs/user/preface/background.html) 了解学习它。
 - **Mybatis-Plus**：MyBatis-Plus 是一个 MyBatis 的增强工具，简化开发、提高了效率，你可以点击 → [Mybatis-Plus 官方参考手册](https://mp.baomidou.com/guide/) 了解学习它。
@@ -198,6 +103,8 @@ $ yo deepexi-dubbo --help
 - **单元测试**：SpringBoot 单元测试与 Mockito 的使用可阅读改篇文章 → [点击这里](https://juejin.im/post/5d62cc3ee51d45620b21c3e9)。
 > ... 持续更新 ->  [聪明的杰瑞博客](https://juejin.im/user/5bd1c4886fb9a05cd777874a)
 
-### DDD 领域设计案例
+## 热部署
+Spring Boot DevTools 通过监控项目 .class 字节码文件变化来实现热部署功能，因此在代码被修改后要重新构建项目。
 
-- [工程中心](https://github.com/LinYuanBaoBao/project-center-demo)
+在使用 IntelliJ IDEA 时，您需要构建项目（Ctrl + F9 或 Build→Build Project）。
+

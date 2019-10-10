@@ -1,4 +1,4 @@
-package ${basePackage}.domain.dto;
+package ${basePackage}.model.dto;
 
 import lombok.Data;
 import lombok.ToString;

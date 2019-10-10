@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 
-import ${basePackage}.domain.entity.CrudDemoDO;
+import ${basePackage}.model.entity.CrudDemoDO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package ${basePackage}.service.impl;
 
-import ${basePackage}.domain.entity.CrudDemoDO;
+import ${basePackage}.model.entity.CrudDemoDO;
 import ${basePackage}.mapper.CrudDemoMapper;
 import ${basePackage}.service.CrudDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
