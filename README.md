@@ -60,7 +60,7 @@ $ yo deepexi-dubbo --help
 
 |  **类型**   |                        |                  |             |           |      |
 | :---------: | ---------------------- | ---------------- | ----------- | --------- | ---- |
-|  配置中心   | ☑️Apollo                | ☑️Disconfig       | ☑️Config     |           |      |
+|  配置中心   | ☑️Apollo                | ☑️Disconfig       | ✅️Spring-Cloud-Config     |           |      |
 |  消息队列   | ✅RabbitMQ              | ☑️RocketMQ        | Kafka       |           |      |
 |  注册中心   | ✅eureka                | ✅nacos           |             |           |      |
 |  任务调度   | ☑️ES Job                | ☑️XXL-Job         | ☑️SiaTask    | ☑️Quartz   |      |

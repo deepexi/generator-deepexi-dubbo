@@ -82,7 +82,8 @@ describe('generate app', () => {
           'foo-service-provider/src/main/resources/application-local.yml',
           'foo-service-provider/src/main/resources/application-dev.yml',
           'foo-service-provider/src/main/resources/application-qa.yml',
-          'foo-service-provider/src/main/resources/application-prod.yml'
+          'foo-service-provider/src/main/resources/application-prod.yml',
+          'foo-service-provider/src/main/resources/bootstrap.yml'
         ]);
       })
       it('java', () => {
@@ -378,6 +379,24 @@ describe('optional dependencies', () => {
           '<artifactId>spring-boot-starter-undertow</artifactId>',
           'spring-boot-starter-tomcat'
         ]);
+      });
+    });
+  });
+
+  describe('config', () => {
+    describe('spring-cloud-config', () => {
+      before(() => {
+        return getExecutor({ config: 'spring-cloud-config' });
+      });
+
+      it('should have dependency', () => {
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-cloud-starter-config</artifactId>'
+        ]);
+      });
+
+      it('should have properties', () => {
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/bootstrap.yml')).spring.cloud.config.uri);
       });
     });
   });

@@ -75,6 +75,10 @@ const args0 = {
     prompting: { type: 'list', choices: ['tomcat', 'undertow'], message: '请选择你使用的Web服务器（默认Tomcat）' },
     option: { desc: 'Web服务器', type: String, default: 'tomcat' }
   },
+  config: {
+    prompting: { type: 'list', choices: ['spring-cloud-config', 'none'], message: '请选择你使用的配置中心' },
+    option: { desc: '配置中心', type: String, default: 'none' }
+  },
   demo: {
     prompting: {
       type: 'confirm',
