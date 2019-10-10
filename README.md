@@ -79,8 +79,8 @@ $ yo deepexi-dubbo --help
 |  日志系统   | ✅Logback               | ☑️Log4j2          |             |           |      |
 |  WebSocket  | ☑️Spring Boot Websocket |                  |             |           |      |
 | Bean转换器  | ✅SpringMVC Converter   | ✅MapStruct       |             |           |      |
+| MVC  | ✅SpringMVC                    |                  |             |           |      |
 | DeepEXI产品 | ☑️sPaaS                 |                  |             |           |      |
-| ✅SpringMVC  |                        |                  |             |           |      |
 
 ### 固有项
 
