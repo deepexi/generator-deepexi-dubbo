@@ -76,7 +76,7 @@ const args0 = {
     option: { desc: 'Web服务器', type: String, default: 'tomcat' }
   },
   config: {
-    prompting: { type: 'list', choices: ['spring-cloud-config', 'none'], message: '请选择你使用的配置中心' },
+    prompting: { type: 'list', choices: ['spring-cloud-config', 'apollo', 'none'], message: '请选择你使用的配置中心' },
     option: { desc: '配置中心', type: String, default: 'none' }
   },
   demo: {
@@ -109,6 +109,7 @@ module.exports = require('yo-power-generator').getGenerator(args0, {
 
     props.conditions[props.mq] = (props.mq !== 'none');
     props.conditions[props.converter] = (props.converter !== 'none');
+    props.conditions[props.config] = (props.config !== 'none');
     if (props.circuit !== 'none') {
       props.conditions['has-circuit'] = true;
     } else {

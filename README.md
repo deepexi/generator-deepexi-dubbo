@@ -60,9 +60,9 @@ $ yo deepexi-dubbo --help
 
 |  **类型**   |                        |                  |             |           |      |
 | :---------: | ---------------------- | ---------------- | ----------- | --------- | ---- |
-|  配置中心   | ☑️Apollo                | ☑️Disconfig       | ✅️Spring-Cloud-Config     |           |      |
+|  配置中心   | ✅️Apollo                | ☑️Disconfig       | ✅️Spring-Cloud-Config     |           |      |
 |  消息队列   | ✅RabbitMQ              | ☑️RocketMQ        | Kafka       |           |      |
-|  注册中心   | ✅eureka                | ✅nacos           |             |           |      |
+|  注册中心   | ✅zookeeper                | ✅nacos           |             |           |      |
 |  任务调度   | ☑️ES Job                | ☑️XXL-Job         | ☑️SiaTask    | ☑️Quartz   |      |
 |    RDBMS    | ✅MySQL                 | ☑️PG SQL          | ☑️SQL Server |           |      |
 |    NoSQL    | ☑️Redis                 | ☑️MongoDB         |             |           |      |
@@ -153,7 +153,6 @@ $ yo deepexi-dubbo --help
 │           │           ├── enums       // 枚举类
 │           │           ├── exception   // 异常类
 │           │           ├── extension   // 扩展，如自定义注解
-│           │           ├── manager     // 领域逻辑层
 │           │           ├── mapper      // DAO 层
 │           │           ├── remote      // 远程服务调用
 │           │           ├── repo        // 仓储层（repository）

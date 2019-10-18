@@ -399,5 +399,26 @@ describe('optional dependencies', () => {
         assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/bootstrap.yml')).spring.cloud.config.uri);
       });
     });
+    describe('apollo', () => {
+      before(() => {
+        return getExecutor({ config: 'apollo' });
+      });
+
+      it('should exists files', () => {
+        assertFiles([
+          'foo-service-provider/src/main/resources/META-INF/app.properties'
+        ]);
+      });
+
+      it('should have dependency', () => {
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>apollo-client</artifactId>'
+        ]);
+      });
+
+      it('should have properties', () => {
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/bootstrap.yml')).apollo.meta);
+      });
+    });
   });
 });
