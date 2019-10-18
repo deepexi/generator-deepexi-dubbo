@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/deepexi/generator-deepexi-dubbo/compare/v1.3.0...v1.4.0) (2019-10-18)
+
+
+### Features
+
+* 添加配置中心支持 ([65cb25c](https://github.com/deepexi/generator-deepexi-dubbo/commit/65cb25c))
+
+
+
 ## [1.3.0](https://github.com/deepexi/generator-deepexi-dubbo/compare/v1.2.0...v1.3.0) (2019-10-10)
 
 
