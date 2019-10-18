@@ -51,7 +51,6 @@
 │           │           ├── enums       // 枚举类
 │           │           ├── exception   // 异常类
 │           │           ├── extension   // 扩展，如自定义注解
-│           │           ├── manager     // 领域逻辑层
 │           │           ├── mapper      // DAO 层
 │           │           ├── remote      // 远程服务调用
 │           │           ├── repo        // 仓储层（repository）
