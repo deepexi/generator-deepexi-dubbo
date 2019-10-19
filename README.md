@@ -77,9 +77,9 @@ $ yo deepexi-dubbo --help
 |  对象存储   | ☑️AliOSS                | ☑️FastDFS         | ☑️TencentOSS | ☑️QiNiuOSS |      |
 |     ORM     | ✅MybatisPlus           | ☑️JPA             |             |           |      |
 |  日志系统   | ✅Logback               | ☑️Log4j2          |             |           |      |
-|  WebSocket  | ☑️Spring Boot Websocket |                  |             |           |      |
 | Bean转换器  | ✅SpringMVC Converter   | ✅MapStruct       |             |           |      |
 | MVC  | ✅SpringMVC                    |                  |             |           |      |
+| WebSocket | ☑️Spring Boot Websocket |
 | DeepEXI产品 | ☑️sPaaS                 |                  |             |           |      |
 
 ### 固有项
@@ -87,11 +87,11 @@ $ yo deepexi-dubbo --help
 | **类型**  |                     |             |           |               |      |
 | :-------: | ------------------- | ----------- | --------- | ------------- | ---- |
 | Java版本  | ✅JDK1.8             |             |           |               |      |
-| 开发框架  | ✅springfox(swagger) | ✅lombok     | ☑️guava    | ✅common-lang3 |      |
-| 测试框架  | ☑️jacoco             | ☑️mockserver | ☑️mockneat |               |      |
+| 开发框架  | ✅springfox(swagger) | ✅lombok     | ✅guava    | ✅common-lang3 |      |
+| 测试框架  | ✅junit    | ✅️jfairy| ✅mockito | ✅️jacoco | ✅hamcrest      | ☑️mockneat | ☑️mockserver |
 | 部署相关  | ✅docker             | ✅filebeat   |           |               |      |
 | 开发相关 |  ✅devtools           |             |           |               |      |
-|   其它    | ☑️actuator          |             |           |               |      |
+|   其它    | ✅️actuator          | ✅configuration-processor            |           |               |      |
 
 
 ## Development Reference
