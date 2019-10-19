@@ -21,3 +21,6 @@ server:
   port: 8080
 logging:
   file: <%='logs/${spring.application.name}.log'%>
+management:
+  server:
+    port: 15600

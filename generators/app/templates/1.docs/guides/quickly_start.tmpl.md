@@ -9,6 +9,10 @@
 - **swagger地址**：http://127.0.0.1:8080/swagger-ui.html  
 - **swagger json**：http://127.0.0.1:8080/v2/api-docs
 
+### Actuator
+
+- **actuator地址**：[/actuator/health](http://127.0.0.1:15600/actuator/health)
+
 ## 构建
 
 ### *.jar

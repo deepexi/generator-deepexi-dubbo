@@ -115,7 +115,8 @@ describe('generate app', () => {
           'foo-service-provider/src/main/java/com/deepexi/foo/mapper/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/remote/.gitkeep',
           'foo-service-provider/src/main/java/com/deepexi/foo/util/.gitkeep',
-          'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/.gitkeep'
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/.gitkeep',
+          'foo-service-provider/src/test/java/com/deepexi/foo/BaseTest.java'
         ]);
       })
     })
@@ -153,7 +154,8 @@ describe('generate demo', () => {
         'foo-service-provider/src/main/java/com/deepexi/foo/service/DemoService.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/service/DubboDemoService.java',
         'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DemoServiceImpl.java',
-        'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DubboDemoServiceImpl.java'
+        'foo-service-provider/src/main/java/com/deepexi/foo/service/impl/DubboDemoServiceImpl.java',
+        'foo-service-provider/src/test/java/com/deepexi/foo/util/DemoTest.java'
       ]);
     })
   })
