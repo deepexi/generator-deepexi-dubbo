@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/deepexi/generator-deepexi-dubbo/compare/v1.4.0...v1.5.0) (2019-10-20)
+
+
+### Features
+
+* 添加代码覆盖率、监控、单元测试辅助相关工具 ([#5](https://github.com/deepexi/generator-deepexi-dubbo/issues/5)) ([3d5ac23](https://github.com/deepexi/generator-deepexi-dubbo/commit/3d5ac23))
+
+
+
 ## [1.4.0](https://github.com/deepexi/generator-deepexi-dubbo/compare/v1.3.0...v1.4.0) (2019-10-18)
 
 
