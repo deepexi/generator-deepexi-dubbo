@@ -65,7 +65,7 @@ $ yo deepexi-dubbo --help
 |  注册中心   | ✅zookeeper                | ✅nacos           |             |           |      |
 |  任务调度   | ☑️ES Job                | ☑️XXL-Job         | ☑️SiaTask    | ☑️Quartz   |      |
 |    RDBMS    | ✅MySQL                 | ☑️PG SQL          | ☑️SQL Server |           |      |
-|    NoSQL    | ☑️Redis                 | ☑️MongoDB         |             |           |      |
+|    NoSQL    | ✅️Redis                 | ☑️MongoDB         |             |           |      |
 |   连接池    | ✅Druid                 |                  |             |           |      |
 |  权限控制   | ☑️Shiro                 | ☑️Spring Security |             |           |      |
 | 分布式事务  | ☑️Seata                 |                  |             |           |      |
