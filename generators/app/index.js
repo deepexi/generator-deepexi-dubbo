@@ -71,6 +71,14 @@ const args0 = {
     },
     option: { desc: '消息中间件', type: String, default: 'none' }
   },
+  cache: {
+    prompting: { type: 'list', choices: ['redis', 'none'], message: '请选择你使用的缓存类型' },
+    option: { desc: '缓存', type: String, default: 'none' }
+  },
+  templateEngine: {
+    prompting: { type: 'list', choices: ['thymeleaf', 'none'], message: '请选择你使用的模板引擎' },
+    option: { desc: '模板引擎', type: String, default: 'none' }
+  },
   webServer: {
     prompting: { type: 'list', choices: ['tomcat', 'undertow'], message: '请选择你使用的Web服务器（默认Tomcat）' },
     option: { desc: 'Web服务器', type: String, default: 'tomcat' }
@@ -110,6 +118,8 @@ module.exports = require('yo-power-generator').getGenerator(args0, {
     props.conditions[props.mq] = (props.mq !== 'none');
     props.conditions[props.converter] = (props.converter !== 'none');
     props.conditions[props.config] = (props.config !== 'none');
+    props.conditions[props.templateEngine] = (props.templateEngine !== 'none');
+    props.conditions[props.cache] = (props.cache !== 'none');
     if (props.circuit !== 'none') {
       props.conditions['has-circuit'] = true;
     } else {

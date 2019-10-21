@@ -385,6 +385,62 @@ describe('optional dependencies', () => {
     });
   });
 
+  describe('templateEngine', () => {
+    describe('thymeleaf', () => {
+      before(() => {
+        return getExecutor({ templateEngine: 'thymeleaf', demo: true });
+      });
+
+      it('should exists files', () => {
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/controller/ThymeleafDemoController.java',
+          'foo-service-provider/src/main/resources/templates/demo_page.html'
+        ]);
+      });
+
+      it('should have dependency', () => {
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-boot-starter-thymeleaf</artifactId>'
+        ]);
+      });
+
+      it('should have properties', () => {
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application.yml')).spring.thymeleaf.cache === false);
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application-prod.yml')).spring.thymeleaf.cache);
+      });
+    });
+  });
+
+  describe('cache', () => {
+    describe('redis', () => {
+      before(() => {
+        return getExecutor({ templateEngine: 'redis', demo: true });
+      });
+
+      it('should exists files', () => {
+        assertFiles([
+          'foo-service-provider/src/main/java/com/deepexi/foo/controller/CacheDemoController.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/ObjectCacheDemoService.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/service/StringCacheDemoService.java',
+          'foo-service-provider/src/main/java/com/deepexi/foo/config/CacheConfiguration.java'
+        ]);
+      });
+
+      it('should have dependency', () => {
+        assertFileContent('foo-service-provider/pom.xml', [
+          '<artifactId>spring-boot-starter-data-redis</artifactId>',
+          '<artifactId>spring-boot-starter-cache</artifactId>'
+        ]);
+      });
+
+      it('should have properties', () => {
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application.yml')).spring.redis.timeout);
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application-local.yml')).spring.redis.host);
+        assert(yaml.safeLoad(fs.readFileSync('foo-service-provider/src/main/resources/application-local.yml')).spring.redis.port);
+      });
+    });
+  });
+
   describe('config', () => {
     describe('spring-cloud-config', () => {
       before(() => {
